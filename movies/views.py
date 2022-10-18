@@ -1,27 +1,20 @@
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from rest_framework import generics, permissions, viewsets
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from .models import Movie, Actor
 from .serializers import (
     MovieListSerializer,
-    MovieDetailSerializer,
     ReviewCreateSerializer,
     CreateRatingSerializer,
     ActorListSerializer,
     ActorDetailSerializer,
-    # VideoListSerializer
 )
 from .services import get_client_ip
 from knox.views import LoginView as KnoxLoginView
 from knox.models import AuthToken
 from .serializers import CustomUserSerializer, RegisterSerializer
 from django.contrib.auth import login
-
-# from django_filters.rest_framework import DjangoFilterBackend
-
 from django.http import StreamingHttpResponse
-from django.shortcuts import render, get_object_or_404
 from .services import open_file
 
 
@@ -54,16 +47,6 @@ class MovieListView(viewsets.ModelViewSet):
     queryset = Movie.objects.all()
     serializer_class = MovieListSerializer
 
-    # def get(self, request, *args, **kwargs):
-    #     movies = Movie.objects.filter(draft=False)
-    #     serializer = MovieListSerializer(movies, many=True)
-    #     return Response(serializer.data)
-
-
-class MovieDetailView(generics.RetrieveAPIView):
-    queryset = Movie.objects.filter(draft=False)
-    serializer_class = MovieDetailSerializer
-
 
 class ReviewCreateView(generics.CreateAPIView):
     serializer_class = ReviewCreateSerializer
@@ -84,15 +67,6 @@ class ActorListView(generics.ListAPIView):
 class ActorDetailView(generics.RetrieveAPIView):
     queryset = Actor.objects.all()
     serializer_class = ActorDetailSerializer
-
-
-def get_list_video():
-    pass
-
-
-def get_video(request, pk: int):
-    _video = get_object_or_404(Video, id=pk)
-    return render(request, "video_hosting/video.html", {"video": _video})
 
 
 def get_streaming_video(request, pk: int):

@@ -37,7 +37,8 @@ class ActorDetailSerializer(serializers.ModelSerializer):
 class MovieListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ('id', 'title', 'tagline', 'description', 'poster', 'file', 'category',)
+        # fields = ('id', 'title', 'tagline', 'description', 'poster', 'file', 'category',)'
+        fields = '__all__'
 
 
 class ReviewCreateSerializer(serializers.ModelSerializer):
