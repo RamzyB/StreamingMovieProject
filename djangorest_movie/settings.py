@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-+c1r3ao4-41(1*62xj4y0(c_(x!1ia(ot-_()0t8_f$sdkdvhq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ramazanmovie.uz','www.ramazanmovie.uz']
 
 # Application definition
 
