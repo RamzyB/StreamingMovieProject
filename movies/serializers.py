@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from .managers import CustomUserManager
 from .models import Movie, Review, Rating, Actor, CustomUser
 
 
@@ -37,7 +36,6 @@ class ActorDetailSerializer(serializers.ModelSerializer):
 class MovieListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        # fields = ('id', 'title', 'tagline', 'description', 'poster', 'file', 'category',)'
         fields = '__all__'
 
 
@@ -85,23 +83,16 @@ class CreateRatingSerializer(serializers.ModelSerializer):
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ('id', 'email')
+        fields = ('id', 'email', 'first_name', 'last_name')
 
 
 class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'password')
+        fields = ('first_name', 'last_name', 'email', 'password')
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
         user = CustomUser.objects.create_user(validated_data['email'], validated_data['password'])
-
         return user
-
-
-# class VideoListSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Video
-#         fields = '__all__'

@@ -9,6 +9,8 @@ from django.core.validators import FileExtensionValidator
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('email address', unique=True)
+    first_name = models.CharField('Имя', max_length=200, null=True)
+    last_name = models.CharField('Фамилия', max_length=200, null=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
